@@ -11,15 +11,15 @@ public class ContactoEntity {
     public int Id { get; set; }
     [Required]
     [MaxLength(50)]
-    public string Nombre { get; set; }
+    public string Nombre { get; set; } = string.Empty;
     [Required]
     [MaxLength(50)]
-    public string Alias { get; set; }
+    public string Alias { get; set; } = string.Empty;
     [Required]
-    public int Telefono { get; set; }
+    public string Telefono { get; set; }
     [Required]  
     [MaxLength(100)]
-    public string Email { get; set; }
+    public string Email { get; set; } = string.Empty;
     
     public DateTime CreatedAt { get; set; }
     
