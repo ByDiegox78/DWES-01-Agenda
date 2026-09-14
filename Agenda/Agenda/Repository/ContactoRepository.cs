@@ -36,13 +36,16 @@ public class ContactoRepository : IContactoRepository{
             return Enumerable.Empty<Contacto>();
         }
     }
-    public Contacto? GetById(int id) {
+    public Result<Contacto, DomainError> GetById(int id) {
         try {
             _logger.Debug("Obteniendo contacto con id: {Id}", id);
-            return _context.Contacto.FirstOrDefault(i => i.Id == id)?.ToModel();
+            var contacto = _context.Contacto.FirstOrDefault(i => i.Id == id)?.ToModel();
+            if (contacto is null) 
+                return Result.Failure<Contacto, DomainError>(ContactoErrors.NotFound(id.ToString()));
+            return Result.Success<Contacto, DomainError>(contacto);
         } catch (Exception e) {
             _logger.Error(e,"Error, no se encontro al contacto con ID: {Id}", id);
-            return null;
+            return Result.Failure<Contacto, DomainError>(ContactoErrors.DatabaseError(e.Message));
         }
     }
 
@@ -89,18 +92,18 @@ public class ContactoRepository : IContactoRepository{
         }
     }
 
-    public Contacto? Delete(int id) {
+    public Result<Contacto, DomainError> Delete(int id) {
         try {
             _logger.Debug("Eliminando contacto con id: {Id}", id);
             var entity = _context.Contacto.FirstOrDefault(i => i.Id == id);
-            if (entity == null) return null;
+            if (entity == null) return Result.Failure<Contacto, DomainError>(ContactoErrors.NotFound(id.ToString()));
             _context.Contacto.Remove(entity);
             _context.SaveChanges();
             _logger.Debug("Contacto eliminado correctamente");
-            return entity.ToModel();
+            return Result.Success<Contacto, DomainError>(entity.ToModel());
         } catch (Exception e) {
-            _logger.Error(e,"Error, no se pudo eliminar el contacto con ID: {Id}", id);
-            return null;
+            _logger.Error(e,"Error, no se pudo eliminar el contacto con ID: {Id}", id); 
+            return Result.Failure<Contacto, DomainError>(ContactoErrors.DatabaseError(e.Message));
         }   
     }
     public Contacto? GetByAlias(string alias) {

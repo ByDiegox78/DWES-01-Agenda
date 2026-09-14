@@ -16,14 +16,11 @@ public class ContactoService(IContactoRepository repository, ICached<int, Contac
         return repository.GetAll(page, pageSize);
     }
 
-    public Contacto? GetById(int id) {
+    public Result<Contacto, DomainError> GetById(int id) {
         _logger.Debug("Obteniendo contacto con id: {Id}", id);
-        if (cache.Get(id) is { } cached) return cached;
-        if (repository.GetById(id) is { } c) {
-            cache.Add(id, c);
-            return c;
-        }
-        return null;
+        if (cache.Get(id) is { } cached) return Result.Success<Contacto, DomainError>(cached);
+        return repository.GetById(id)
+            .Tap(c => cache.Add(id, c));
     }
 
     public Contacto? GetByAlias(string alias) {
@@ -33,24 +30,25 @@ public class ContactoService(IContactoRepository repository, ICached<int, Contac
     }
 
     public Result<Contacto, DomainError> Create(Contacto contacto) {
-        
+        _logger.Debug("Creando contacto con alias: {Alias}", contacto.Alias);
+        return repository.Create(contacto)
+            .Tap(t => cache.Add(t.Id, t));
     }
 
     public Result<Contacto, DomainError> Update(int id, Contacto contacto) {
         _logger.Debug("Actualizando contacto con id: {Id}", id);
-        return ComprobarSiExisteContacto(id)
+        return repository.GetById(id)
             .Tap(t => { cache.Remove(id); })
             .Bind(c => repository.Update(id, contacto));
     }
 
     public Result<Contacto, DomainError> Delete(int id) {
+        _logger.Debug("Eliminando contacto con id: {Id}", id);
         return ComprobarSiExisteContacto(id)
             .Tap(t => { cache.Remove(id); })
-            .Map(b => repository.Delete(id));
+            .Bind(b => repository.Delete(id));
     }
     private Result<Contacto, DomainError> ComprobarSiExisteContacto(int id) {
-        return repository.GetById(id) is { } c
-            ? Result.Success<Contacto, DomainError>(c)
-            : Result.Failure<Contacto, DomainError>(ContactoErrors.NotFound(id.ToString()));
+        return repository.GetById(id);
     }
 }

@@ -69,10 +69,11 @@ public class ContactoRespositoryTest {
             _repository.Create(contacto);
             var res = _repository.GetById(1);
             
-            res.Should().NotBeNull();
-            res!.Id.Should().Be(1);
-            res.Nombre.Should().Be("Juan");
-            res.Alias.Should().Be("juan");
+            res.IsSuccess.Should().BeTrue();
+            res.Value.Should().NotBeNull();
+            res.Value.Id.Should().Be(1);
+            res.Value.Nombre.Should().Be("Juan");
+            res.Value.Alias.Should().Be("juan");
         }
 
         [Test]
@@ -153,8 +154,8 @@ public class ContactoRespositoryTest {
             _repository.Create(contacto);
             var res = _repository.Delete(1);
             
-            res.Should().NotBeNull();
-            _repository.GetById(1).Should().BeNull();
+            res.IsSuccess.Should().BeTrue();
+            _repository.GetById(1).IsFailure.Should().BeTrue();
         }
     }
 
@@ -216,13 +217,40 @@ public class ContactoRespositoryTest {
         [Test]
         public void Delete_EliminarInexistente_DebeDevolverError() {
             var res = _repository.Delete(1);
-            res.Should().BeNull();
+            res.IsFailure.Should().BeTrue();
+            res.Error.Should().BeOfType<ContactoError.NotFound>();
         }
         [Test]
         public void GetByAlias_ConAliasInexistente_DebeDevolverError() {
             var res = _repository.GetByAlias("juan");
             res.Should().BeNull();
         }
+        [Test]
+        public void Create_ConErrorDeBaseDeDatos_DevuelveFailure() {
+            var contacto = new Contacto {
+                Nombre = "Juan", Alias = "juan", Telefono = null!, Email = "juan@test.com",
+                CreatedAt = DateTime.UtcNow, UpdatedAt = DateTime.UtcNow, IsDeleted = false
+            };
+            var res = _repository.Create(contacto);
+            res.IsFailure.Should().BeTrue();
+            res.Error.Should().BeOfType<ContactoError.DatabaseError>();
+        }
+        [Test]
+        public void Update_ConErrorDeBaseDeDatos_DevuelveFailure() {
+            var original = new Contacto {
+                Nombre = "Juan", Alias = "juan", Telefono = "123456789", Email = "juan@test.com",
+                CreatedAt = DateTime.UtcNow, UpdatedAt = DateTime.UtcNow, IsDeleted = false
+            };
+            _repository.Create(original);
+
+            var invalido = new Contacto {
+                Nombre = "Juan", Alias = "juan", Telefono = null!, Email = "juan@test.com"
+            };
+            var res = _repository.Update(1, invalido);
+            res.IsFailure.Should().BeTrue();
+            res.Error.Should().BeOfType<ContactoError.DatabaseError>();
+        }
     }
+    
    
 }

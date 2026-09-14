@@ -7,7 +7,7 @@ namespace Agenda.Service;
 public interface IContactoService {
     IEnumerable<Contacto> GetAll(int page, int pageSize);
     
-    Contacto? GetById(int id);
+    Result<Contacto, DomainError> GetById(int id);
     
     Contacto? GetByAlias(string alias);
 
