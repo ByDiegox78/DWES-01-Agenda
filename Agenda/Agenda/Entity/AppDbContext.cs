@@ -10,7 +10,7 @@ public class AppDbContext  : DbContext {
         _connectionString = connectionString;
     }
 
-    public AppDbContext(DbContextOptions<AppDbContext> options) {
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {
         _connectionString = "";
     }
 

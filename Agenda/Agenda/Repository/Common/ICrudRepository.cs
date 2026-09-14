@@ -4,13 +4,13 @@ using GestionEsports.Esports.Error.Common;
 namespace Agenda.Repository.Common;
 
 public interface ICrudRepository<TKey, Tvalue> {
-    IEnumerable<Tvalue?> GetAll(int page, int pageSize, bool isDeleted);
+    IEnumerable<Tvalue> GetAll(int page, int pageSize);
     
     Tvalue? GetById(TKey id);
 
-    Result<Tvalue, DomainError> Create(Tvalue jugador);
+    Result<Tvalue, DomainError> Create(Tvalue contacto);
     
-    Result<Tvalue, DomainError> Update(TKey id, Tvalue jugador);
+    Result<Tvalue, DomainError> Update(TKey id, Tvalue contacto);
 
-    Tvalue? Delete(TKey id, bool isLogic);
+    Tvalue? Delete(TKey id);
 }

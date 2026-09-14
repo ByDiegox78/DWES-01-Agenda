@@ -1,7 +1,10 @@
 ﻿using Agenda.Entity;
+using Agenda.Error.ContactoError;
+using Agenda.Mapper;
 using Agenda.Models;
 using CSharpFunctionalExtensions;
 using GestionEsports.Esports.Error.Common;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace Agenda.Repository;
@@ -12,37 +15,105 @@ public class ContactoRepository : IContactoRepository{
     public ContactoRepository(AppDbContext context, bool dropData = false) {
         _context = context;
         if (dropData) _context.Database.EnsureDeleted();
-        _context.EnsurceCreated();
+        _context.Database.EnsureCreated();
     }
     
     
-    public IEnumerable<Contacto?> GetAll(int page, int pageSize, bool isDeleted) {
-        throw new NotImplementedException();
+    public IEnumerable<Contacto> GetAll(int page, int pageSize) {
+        _logger.Debug("Obteniendo todos los contactos");
+        try {
+            var query = _context.Contacto.AsNoTracking();
+            var entities = query
+                .OrderBy(i => i.Id)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+            _logger.Debug("Se han obtenido {Count} contactos exitosamente", entities.Count);
+            return entities.Select(i => i.ToModel());
+        }
+        catch (Exception e) {
+            _logger.Error(e,"Error, no se pudieron obtener los contactos");
+            return Enumerable.Empty<Contacto>();
+        }
     }
-
     public Contacto? GetById(int id) {
         try {
             _logger.Debug("Obteniendo contacto con id: {Id}", id);
-            return _context.Contacto.FirstOrDefault(i => i.Id == id)?.tom;
+            return _context.Contacto.FirstOrDefault(i => i.Id == id)?.ToModel();
         } catch (Exception e) {
-            Console.WriteLine(e);
-            throw;
+            _logger.Error(e,"Error, no se encontro al contacto con ID: {Id}", id);
+            return null;
         }
     }
 
-    public Result<Contacto, DomainError> Create(Contacto jugador) {
-        throw new NotImplementedException();
+    public Result<Contacto, DomainError> Create(Contacto contacto) {
+        _logger.Debug("Creando contacto...");
+        var exist = ExisteContacto(contacto.Alias);
+        if (exist)
+            return Result.Failure<Contacto, DomainError>(ContactoErrors.NameAlreadyExists(contacto.Nombre));
+        contacto = contacto with {
+            Id = 0,
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow,
+            IsDeleted = false
+        };
+        try {
+            var entity = contacto.ToEntity();
+            _context.Contacto.Add(entity);
+            _context.SaveChanges();
+            _logger.Debug("Contacto creado correctamente");
+            return Result.Success<Contacto, DomainError>(entity.ToModel());
+        } catch (Exception e) {
+            _logger.Error(e,"Error, no se pudo crear al contacto que introducistes");
+            return Result.Failure<Contacto, DomainError>(ContactoErrors.DatabaseError(e.Message));
+        }
     }
 
-    public Result<Contacto, DomainError> Update(int id, Contacto jugador) {
-        throw new NotImplementedException();
+    public Result<Contacto, DomainError> Update(int id, Contacto contacto) {
+        _logger.Debug("Actualizando contacto con id: {Id}", id);
+        var entity = _context.Contacto.FirstOrDefault(i => i.Id == id);
+        if (entity == null) 
+            return Result.Failure<Contacto, DomainError>(ContactoErrors.NotFound(id.ToString()));
+        entity.Nombre = contacto.Nombre;
+        entity.Alias = contacto.Alias;
+        entity.Telefono = contacto.Telefono;
+        entity.Email = contacto.Email;
+        entity.UpdatedAt = DateTime.UtcNow;
+        try {
+            _context.SaveChanges();
+            _logger.Debug("Contacto actualizado correctamente");
+            return Result.Success<Contacto, DomainError>(entity.ToModel());
+        } catch (Exception e) {
+            _logger.Error(e,"Error, no se pudo actualizar el contacto con ID: {Id}", id);
+            return Result.Failure<Contacto, DomainError>(ContactoErrors.DatabaseError(e.Message));
+        }
     }
 
-    public Contacto? Delete(int id, bool isLogic) {
-        throw new NotImplementedException();
+    public Contacto? Delete(int id) {
+        try {
+            _logger.Debug("Eliminando contacto con id: {Id}", id);
+            var entity = _context.Contacto.FirstOrDefault(i => i.Id == id);
+            if (entity == null) return null;
+            _context.Contacto.Remove(entity);
+            _context.SaveChanges();
+            _logger.Debug("Contacto eliminado correctamente");
+            return entity.ToModel();
+        } catch (Exception e) {
+            _logger.Error(e,"Error, no se pudo eliminar el contacto con ID: {Id}", id);
+            return null;
+        }   
     }
-
     public Contacto? GetByAlias(string alias) {
-        throw new NotImplementedException();
+        try {
+            _logger.Debug("Obteniendo contacto con alias: {Alias}", alias);
+            return _context.Contacto.FirstOrDefault(i => i.Alias == alias)?.ToModel();
+        } catch (Exception e) {
+            _logger.Error(e,"Error, no se encontro al contacto con alias: {Alias}", alias);
+            return null;
+        }
+    }
+    private bool ExisteContacto(string alias) {
+        _logger.Debug("Verificando si existe contacto con alias: {alias}", alias);
+        return _context.Contacto.Any(i => i.Alias == alias);
     }
 }
