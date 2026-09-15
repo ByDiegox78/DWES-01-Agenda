@@ -32,7 +32,7 @@ public class ContactoService(IContactoRepository repository, ICached<int, Contac
     public Result<Contacto, DomainError> Create(Contacto contacto) {
         _logger.Debug("Creando contacto con alias: {Alias}", contacto.Alias);
         return repository.Create(contacto)
-            .Tap(t => cache.Add(t.Id, t));
+            .Tap(t => cache.Add(t.Id, t)); // Quitarlo
     }
     /// <inheritdoc />
     public Result<Contacto, DomainError> Update(int id, Contacto contacto) {

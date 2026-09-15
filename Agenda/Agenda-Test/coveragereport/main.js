@@ -290,17 +290,20 @@ var assemblies = [
   {
     "name": "Agenda",
     "classes": [
-      { "name": "Agenda.Entity.AppDbContext", "rp": "Agenda_AppDbContext.html", "cl": 7, "ucl": 6, "cal": 13, "tl": 24, "cb": 2, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Agenda.Config.AppConfig", "rp": "Agenda_AppConfig.html", "cl": 0, "ucl": 12, "cal": 12, "tl": 21, "cb": 0, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Agenda.Entity.AppDbContext", "rp": "Agenda_AppDbContext.html", "cl": 14, "ucl": 12, "cal": 26, "tl": 56, "cb": 3, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Agenda.Entity.ContactoEntity", "rp": "Agenda_ContactoEntity.html", "cl": 8, "ucl": 0, "cal": 8, "tl": 29, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Agenda.Error.ContactoError.ContactoError", "rp": "Agenda_ContactoError.html", "cl": 6, "ucl": 3, "cal": 9, "tl": 24, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Agenda.Error.ContactoError.ContactoErrors", "rp": "Agenda_ContactoErrors.html", "cl": 12, "ucl": 2, "cal": 14, "tl": 24, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Agenda.Mapper.ContactoMapper", "rp": "Agenda_ContactoMapper.html", "cl": 24, "ucl": 0, "cal": 24, "tl": 31, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Agenda.Error.Common.DomainError", "rp": "Agenda_DomainError.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 6, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Agenda.Error.ContactoError.ContactoError", "rp": "Agenda_ContactoError.html", "cl": 10, "ucl": 5, "cal": 15, "tl": 53, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Agenda.Error.ContactoError.ContactoErrors", "rp": "Agenda_ContactoErrors.html", "cl": 21, "ucl": 2, "cal": 23, "tl": 53, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Agenda.Infraestructure.DependencesProvider", "rp": "Agenda_DependencesProvider.html", "cl": 0, "ucl": 31, "cal": 31, "tl": 46, "cb": 0, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Agenda.Mapper.ContactoMapper", "rp": "Agenda_ContactoMapper.html", "cl": 36, "ucl": 0, "cal": 36, "tl": 48, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Agenda.Models.Contacto", "rp": "Agenda_Contacto.html", "cl": 9, "ucl": 0, "cal": 9, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Agenda.Repository.ContactoRepository", "rp": "Agenda_ContactoRepository.html", "cl": 105, "ucl": 0, "cal": 105, "tl": 122, "cb": 30, "tb": 30, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Agenda.Repository.ContactoRepository", "rp": "Agenda_ContactoRepository.html", "cl": 117, "ucl": 4, "cal": 121, "tl": 141, "cb": 42, "tb": 42, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Agenda.Service.ContactoService", "rp": "Agenda_ContactoService.html", "cl": 37, "ucl": 0, "cal": 37, "tl": 54, "cb": 4, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "GestionEsports.Esports.Error.Common.DomainError", "rp": "Agenda_DomainError.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 3, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Program", "rp": "Agenda_Program.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 3, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Vehiculos.Cache.CacheLru<T1, T2>", "rp": "Agenda_CacheLru_2.html", "cl": 57, "ucl": 5, "cal": 62, "tl": 70, "cb": 10, "tb": 18, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "GestionEsports.Esports.Error.Common.DomainError", "rp": "Agenda_DomainError.2.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 6, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Program", "rp": "Agenda_Program.html", "cl": 0, "ucl": 82, "cal": 82, "tl": 127, "cb": 0, "tb": 28, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Vehiculos.Cache.CacheLru<T1, T2>", "rp": "Agenda_CacheLru_2.html", "cl": 67, "ucl": 1, "cal": 68, "tl": 81, "cb": 20, "tb": 26, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
 ];
 
@@ -309,9 +312,23 @@ var metrics = [{ "name": "Crap Score", "abbreviation": "crp", "explanationUrl": 
 var historicCoverageExecutionTimes = [];
 
 var riskHotspotMetrics = [
+      { "name": "Crap Score", "explanationUrl": "https://googletesting.blogspot.de/2011/02/this-code-is-crap.html" },
+      { "name": "Cyclomatic complexity", "explanationUrl": "https://en.wikipedia.org/wiki/Cyclomatic_complexity" },
 ];
 
 var riskHotspots = [
+  {
+    "assembly": "Agenda", "class": "Program", "reportPath": "Agenda_Program.html", "methodName": "<Main>$(System.String[])", "methodShortName": "<Main>$(...)", "fileIndex": 0, "line": 11,
+    "metrics": [
+      { "value": 342, "exceeded": true },
+      { "value": 18, "exceeded": true },
+    ]},
+  {
+    "assembly": "Agenda", "class": "Program", "reportPath": "Agenda_Program.html", "methodName": "Codigo()", "methodShortName": "Codigo()", "fileIndex": 0, "line": 113,
+    "metrics": [
+      { "value": 72, "exceeded": true },
+      { "value": 8, "exceeded": false },
+    ]},
 ];
 
 var branchCoverageAvailable = true;
