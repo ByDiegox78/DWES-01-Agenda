@@ -1,0 +1,22 @@
+﻿services:
+  agenda: 
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: final
+    restart: always
+  agendatest: 
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: testweb
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - "webtests"
+networks:
+  webtests:
+    driver: bridge
+    

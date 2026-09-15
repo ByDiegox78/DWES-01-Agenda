@@ -292,15 +292,15 @@ var assemblies = [
     "classes": [
       { "name": "Agenda.Entity.AppDbContext", "rp": "Agenda_AppDbContext.html", "cl": 7, "ucl": 6, "cal": 13, "tl": 24, "cb": 2, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Agenda.Entity.ContactoEntity", "rp": "Agenda_ContactoEntity.html", "cl": 8, "ucl": 0, "cal": 8, "tl": 29, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Agenda.Error.ContactoError.ContactoError", "rp": "Agenda_ContactoError.html", "cl": 5, "ucl": 4, "cal": 9, "tl": 29, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Agenda.Error.ContactoError.ContactoErrors", "rp": "Agenda_ContactoErrors.html", "cl": 9, "ucl": 3, "cal": 12, "tl": 29, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Agenda.Error.ContactoError.ContactoError", "rp": "Agenda_ContactoError.html", "cl": 6, "ucl": 3, "cal": 9, "tl": 24, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Agenda.Error.ContactoError.ContactoErrors", "rp": "Agenda_ContactoErrors.html", "cl": 12, "ucl": 2, "cal": 14, "tl": 24, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Agenda.Mapper.ContactoMapper", "rp": "Agenda_ContactoMapper.html", "cl": 24, "ucl": 0, "cal": 24, "tl": 31, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Agenda.Models.Contacto", "rp": "Agenda_Contacto.html", "cl": 9, "ucl": 0, "cal": 9, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Agenda.Repository.ContactoRepository", "rp": "Agenda_ContactoRepository.html", "cl": 105, "ucl": 0, "cal": 105, "tl": 122, "cb": 30, "tb": 30, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Agenda.Service.ContactoService", "rp": "Agenda_ContactoService.html", "cl": 0, "ucl": 37, "cal": 37, "tl": 54, "cb": 0, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Agenda.Service.ContactoService", "rp": "Agenda_ContactoService.html", "cl": 37, "ucl": 0, "cal": 37, "tl": 54, "cb": 4, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "GestionEsports.Esports.Error.Common.DomainError", "rp": "Agenda_DomainError.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 3, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Program", "rp": "Agenda_Program.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 3, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Vehiculos.Cache.CacheLru<T1, T2>", "rp": "Agenda_CacheLru_2.html", "cl": 0, "ucl": 52, "cal": 52, "tl": 65, "cb": 0, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Vehiculos.Cache.CacheLru<T1, T2>", "rp": "Agenda_CacheLru_2.html", "cl": 57, "ucl": 5, "cal": 62, "tl": 70, "cb": 10, "tb": 18, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
 ];
 
