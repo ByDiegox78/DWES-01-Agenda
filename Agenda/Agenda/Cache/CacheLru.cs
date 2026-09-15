@@ -8,13 +8,17 @@ public class CacheLru<TKey, TValue> : ICached<TKey, TValue>
     private readonly Dictionary<TKey, TValue> _dataContacto = new();
     private readonly LinkedList<TKey> _set = new();
     private readonly ILogger _logger = Log.ForContext<CacheLru<TKey, TValue>>();
-
+    /// <summary>
+    /// Inicializa una nueva instancia de la caché LRU con la capacidad especificada.
+    /// </summary>
+    /// <param name="capacity">Capacidad máxima de elementos en la caché.</param>
     public CacheLru(int capacity) {
         if (capacity <= 0)
             throw new ArgumentException("La capacidad no puede ser menor o igual que 0", nameof(capacity));
         _capacity = capacity;
     }
-    
+    /// <inheritdoc cref="ICached{TKey,TValue}.Add" />
+
     public void Add(TKey key, TValue value) {
         _logger.Debug("[LRU-ADD] Intentando añadir clave: {Key}", key);
         if (_dataContacto.TryGetValue(key, out var existingValue)) {
@@ -39,6 +43,7 @@ public class CacheLru<TKey, TValue> : ICached<TKey, TValue>
         _logger.Debug("[LRU-ADD] Elemento añadido. Nueva lista de uso: {Order}",
             string.Join(" -> ", _set));
     }
+    /// <inheritdoc cref="ICached{TKey,TValue}.Get" />
     public TValue? Get(TKey key) {
         _logger.Debug("[LRU-GET] Buscando clave: {Key}", key);
         if (!_dataContacto.TryGetValue(key, out var value)) {
@@ -52,6 +57,7 @@ public class CacheLru<TKey, TValue> : ICached<TKey, TValue>
             string.Join(" -> ", _set));
         return value;
     }
+    /// <inheritdoc cref="ICached{TKey,TValue}.Remove" />
     public bool Remove(TKey key) {
         _logger.Debug("[LRU-REMOVE] Intentando eliminar clave: {Key}", key);
         if (!_dataContacto.Remove(key)) {
@@ -62,6 +68,11 @@ public class CacheLru<TKey, TValue> : ICached<TKey, TValue>
         _logger.Debug("[LRU-REMOVE] Clave {Key} eliminada correctamente", key);
         return true;
     } 
+    /// <summary>
+    ///     Mueve una clave existente a la última posición de la lista de uso.
+    ///     Este método es el corazón del algoritmo LRU.
+    /// </summary>
+    /// <param name="key">La clave del elemento que acaba de ser utilizado.</param>
     private void RefreshUsage(TKey key) {
         _logger.Verbose("[LRU-REFRESH] Moviendo clave {Key} al final de la lista", key);
         _set.Remove(key);
