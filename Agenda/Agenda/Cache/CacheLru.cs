@@ -9,7 +9,12 @@ public class CacheLru<TKey, TValue> : ICached<TKey, TValue>
     private readonly LinkedList<TKey> _set = new();
     private readonly ILogger _logger = Log.ForContext<CacheLru<TKey, TValue>>();
 
-
+    public CacheLru(int capacity) {
+        if (capacity <= 0)
+            throw new ArgumentException("La capacidad no puede ser menor o igual que 0", nameof(capacity));
+        _capacity = capacity;
+    }
+    
     public void Add(TKey key, TValue value) {
         _logger.Debug("[LRU-ADD] Intentando añadir clave: {Key}", key);
         if (_dataContacto.TryGetValue(key, out var existingValue)) {
